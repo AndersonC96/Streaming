@@ -18,8 +18,9 @@ Este projeto consiste em uma aplicação web que permite aos usuários pesquisar
 
 ## Estrutura do Projeto
 
-- `index.html`
-- `search.php`
+.
+├── index.html
+└── search.php
 
 ## Configuração e Uso
 
