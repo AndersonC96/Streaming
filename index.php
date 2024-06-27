@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Pesquisa</title>
         <script src="https://cdn.tailwindcss.com"></script>
+        <link rel='shortcut icon' type='image/x-icon' href='./img/favicon.png' />
     </head>
     <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
         <div class="min-h-screen flex items-center justify-center">
