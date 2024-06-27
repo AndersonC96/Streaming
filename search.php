@@ -1,7 +1,7 @@
 <?php
     if(isset($_GET['query'])){
         $query = urlencode($_GET['query']);
-        $apiKey = 'e9e1d5e5';
+        $apiKey = 'your_omdb_api_key';
         $url = "http://www.omdbapi.com/?apikey={$apiKey}&t={$query}";
         $response = file_get_contents($url);
         $data = json_decode($response, true);
