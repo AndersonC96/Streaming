@@ -3,7 +3,6 @@
         $query = urlencode($_GET['query']);
         $apiKey = 'your_omdb_api_key';
         $url = "http://www.omdbapi.com/?apikey={$apiKey}&s={$query}";
-        echo "<p>URL de pesquisa: <a href=\"{$url}\" target=\"_blank\">{$url}</a></p>";
         $response = file_get_contents($url);
         $data = json_decode($response, true);
         if ($data['Response'] == 'True') {
