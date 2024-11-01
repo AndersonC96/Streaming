@@ -39,20 +39,26 @@
             echo "</div>";
             // Paginação
             echo "<div class='mt-6 text-center'>";
+            $paginationLimit = 5; // Número máximo de páginas exibidas
+            $startPage = max(1, $currentPage - floor($paginationLimit / 2));
+            $endPage = min($totalPages, $startPage + $paginationLimit - 1);
+            if ($endPage - $startPage + 1 < $paginationLimit) {
+                $startPage = max(1, $endPage - $paginationLimit + 1);
+            }
             if ($currentPage > 1) {
                 $prevPage = $currentPage - 1;
-                echo "<a href='?query={$_GET['query']}&page={$prevPage}' class='text-blue-500 hover:underline'>&laquo; Página anterior</a> ";
+                echo "<a href='?query={$_GET['query']}&page={$prevPage}' class='text-blue-500 hover:underline mr-2'>Anterior</a>";
             }
-            for ($i = 1; $i <= $totalPages; $i++) {
+            for ($i = $startPage; $i <= $endPage; $i++) {
                 if ($i == $currentPage) {
-                    echo "<span class='mx-2 font-bold text-gray-700 dark:text-white'>{$i}</span>";
+                    echo "<span class='mx-1 font-bold text-gray-700 dark:text-white'>{$i}</span>";
                 } else {
                     echo "<a href='?query={$_GET['query']}&page={$i}' class='mx-1 text-blue-500 hover:underline'>{$i}</a>";
                 }
             }
             if ($currentPage < $totalPages) {
                 $nextPage = $currentPage + 1;
-                echo "<a href='?query={$_GET['query']}&page={$nextPage}' class='text-blue-500 hover:underline'>Próxima página &raquo;</a>";
+                echo "<a href='?query={$_GET['query']}&page={$nextPage}' class='text-blue-500 hover:underline ml-2'>Próxima</a>";
             }
             echo "</div>";
         } else {
@@ -61,4 +67,4 @@
     } else {
         echo "<p class='text-gray-500'>Nenhuma consulta fornecida.</p>";
     }
-    include('footer.php');
+include('footer.php');
