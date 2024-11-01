@@ -8,7 +8,7 @@
     if (isset($_GET['query'])) {
         $query = urlencode($_GET['query']);
         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página atual, padrão é 1
-        $itemsPerPage = 14; // Número de itens por página
+        $itemsPerPage = 10; // Número de itens por página
         $url = "http://www.omdbapi.com/?apikey={$apiKey}&s={$query}&page={$currentPage}";
         $response = file_get_contents($url);
         $data = json_decode($response, true);
