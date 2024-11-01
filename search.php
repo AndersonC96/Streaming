@@ -37,30 +37,36 @@
                 }
             }
             echo "</div>";
-            // Paginação
-            echo "<div class='mt-6 text-center'>";
+            // Paginação estilizada com Tailwind
+            echo "<nav aria-label='Page navigation' class='mt-6 flex justify-center'>";
+            echo "<ul class='inline-flex items-center space-x-2 border rounded-lg p-2 bg-gray-50 dark:bg-gray-800'>";
+            if ($currentPage > 1) {
+                $prevPage = $currentPage - 1;
+                echo "<li class='page-item'><a href='?query={$_GET['query']}&page={$prevPage}' class='page-link px-3 py-2 text-sm font-medium text-blue-500 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md'>Anterior</a></li>";
+            } else {
+                echo "<li class='page-item disabled'><span class='page-link px-3 py-2 text-sm font-medium text-gray-400 rounded-md'>Anterior</span></li>";
+            }
             $paginationLimit = 5; // Número máximo de páginas exibidas
             $startPage = max(1, $currentPage - floor($paginationLimit / 2));
             $endPage = min($totalPages, $startPage + $paginationLimit - 1);
             if ($endPage - $startPage + 1 < $paginationLimit) {
                 $startPage = max(1, $endPage - $paginationLimit + 1);
             }
-            if ($currentPage > 1) {
-                $prevPage = $currentPage - 1;
-                echo "<a href='?query={$_GET['query']}&page={$prevPage}' class='text-blue-500 hover:underline mr-2'>Anterior</a>";
-            }
             for ($i = $startPage; $i <= $endPage; $i++) {
                 if ($i == $currentPage) {
-                    echo "<span class='mx-1 font-bold text-gray-700 dark:text-white'>{$i}</span>";
+                    echo "<li class='page-item'><span class='page-link px-3 py-2 text-sm font-bold text-white bg-blue-500 rounded-md'>{$i}</span></li>";
                 } else {
-                    echo "<a href='?query={$_GET['query']}&page={$i}' class='mx-1 text-blue-500 hover:underline'>{$i}</a>";
+                    echo "<li class='page-item'><a href='?query={$_GET['query']}&page={$i}' class='page-link px-3 py-2 text-sm font-medium text-blue-500 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md'>{$i}</a></li>";
                 }
             }
             if ($currentPage < $totalPages) {
                 $nextPage = $currentPage + 1;
-                echo "<a href='?query={$_GET['query']}&page={$nextPage}' class='text-blue-500 hover:underline ml-2'>Próxima</a>";
+                echo "<li class='page-item'><a href='?query={$_GET['query']}&page={$nextPage}' class='page-link px-3 py-2 text-sm font-medium text-blue-500 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md'>Próxima</a></li>";
+            } else {
+                echo "<li class='page-item disabled'><span class='page-link px-3 py-2 text-sm font-medium text-gray-400 rounded-md'>Próxima</span></li>";
             }
-            echo "</div>";
+            echo "</ul>";
+            echo "</nav>";
         } else {
             echo "<p class='text-red-500'>Filme não encontrado.</p>";
         }
