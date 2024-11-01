@@ -87,4 +87,27 @@
     } else {
         echo "<p class='text-gray-500'>Nenhuma consulta fornecida.</p>";
     }
+    // Script JavaScript para ativar a pesquisa por voz
+    echo "<script>
+        const voiceSearchButton = document.getElementById('voice-search-button');
+        const voiceSearchInput = document.getElementById('voice-search');
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecognition) {
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'pt-BR'; // Defina o idioma de acordo com suas necessidades
+            recognition.onresult = function(event) {
+                voiceSearchInput.value = event.results[0][0].transcript;
+            };
+            recognition.onerror = function(event) {
+                console.error('Erro no reconhecimento de voz: ' + event.error);
+                alert('Ocorreu um erro no reconhecimento de voz. Por favor, tente novamente.');
+            };
+            voiceSearchButton.addEventListener('click', function() {
+                recognition.start();
+            });
+        } else {
+            console.log('API de reconhecimento de voz não é suportada neste navegador.');
+            alert('A funcionalidade de reconhecimento de voz não é suportada neste navegador.');
+        }
+    </script>";
 include('footer.php');
